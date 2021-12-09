@@ -8,11 +8,11 @@ exports.create = (req, res) => {
   const guess = {
     idGame: req.body.idGame,
     idUser: req.body.idUser,
-    guessing: req.body.guessing,
-    photo1: req.body.photo1,
-    photo2: req.body.photo2,
-    photo3: req.body.photo3,
-    photo4: req.body.photo4,
+    guessing: req.body.guessing.txtPlayerAnswer,
+    photo1: req.body.guessing.photo1,
+    photo2: req.body.guessing.photo2,
+    photo3: req.body.guessing.photo3,
+    photo4: req.body.guessing.photo4,
   };
 
   // Save

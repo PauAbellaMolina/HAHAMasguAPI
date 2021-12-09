@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "http://localhost:8081"
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -32,7 +32,7 @@ require("./app/routes/game.routes")(app);
 require("./app/routes/guess.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
