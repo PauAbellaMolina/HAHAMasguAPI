@@ -4,15 +4,15 @@ const Op = db.Sequelize.Op;
 
 // Create and Save
 exports.create = (req, res) => {
-  // Create
+  //Create
   const guess = {
-    idGame: req.body.idGame,
-    idUser: req.body.idUser,
-    guessing: req.body.guessing.txtPlayerAnswer,
-    photo1: req.body.guessing.photo1,
-    photo2: req.body.guessing.photo2,
-    photo3: req.body.guessing.photo3,
-    photo4: req.body.guessing.photo4,
+    idGame: req.body.state.idGame,
+    idUser: req.body.state.idUser,
+    guessing: req.body.state.guessing.txtPlayerAnswer,
+    photo1: req.body.state.guessing.photos.photo1,
+    photo2: req.body.state.guessing.photos.photo2,
+    photo3: req.body.state.guessing.photos.photo3,
+    photo4: req.body.state.guessing.photos.photo4,
   };
 
   // Save

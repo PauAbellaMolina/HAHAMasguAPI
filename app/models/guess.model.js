@@ -15,16 +15,16 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     photo1: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT('long')
     },
     photo2: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT('long')
     },
     photo3: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT('long')
     },
     photo4: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT('long')
     },
   },
   );

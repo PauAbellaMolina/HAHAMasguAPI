@@ -8,9 +8,9 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '200mb'}));
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 
 const db = require("./app/models");
 //DOES KEEP DB DATA
