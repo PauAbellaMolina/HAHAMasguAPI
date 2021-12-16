@@ -2,6 +2,28 @@ const db = require("../models");
 const User = db.users;
 const Op = db.Sequelize.Op;
 
+exports.tryLoging = (req, res) => {
+    User.findAll({ //find user with received user and pass from api call from frontend
+      where: {
+        username: req.body.data.name,
+        password: req.body.data.pin
+      }
+    })
+    .then(data => {
+      if(data.length > 0) { //if found some user with that username and password, return true which means he logged succesfully
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Error tryLoging() in user.controller.js"
+      });
+    });
+};
+
 // Create and Save
 exports.create = (req, res) => {
   // Validate request

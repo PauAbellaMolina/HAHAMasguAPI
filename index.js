@@ -1,8 +1,12 @@
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const portIO = 3000;
+
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -13,6 +17,7 @@ app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 
 const db = require("./app/models");
+
 //DOES KEEP DB DATA
 db.sequelize.sync();
 
@@ -36,3 +41,27 @@ const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+http.listen(portIO, () => {
+  console.log(`Socket.IO server running at http://localhost:${portIO}/`);
+});
+
+
+/////////SOCKET IO//////////
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  io.emit("customEmit");
+
+  socket.on('test', () => {
+    io.emit("test");
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+/////////SOCKET IO//////////
+
