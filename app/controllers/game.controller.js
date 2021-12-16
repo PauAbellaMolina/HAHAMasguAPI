@@ -2,6 +2,23 @@ const db = require("../models");
 const Game = db.games;
 const Op = db.Sequelize.Op;
 
+exports.enterGameRoom = (req, res) => {
+  Game.findAll({ //find games with received gameCode from api call from frontend
+    where: {
+      gameCode: req.body.gameCodeRequest,
+    }
+  })
+  .then(data => {
+    res.send(data); //Send room back
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error enterGameRoom() in game.controller.js"
+    });
+  });
+};
+
 // Create and Save
 exports.create = (req, res) => {
   // Create

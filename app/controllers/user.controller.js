@@ -3,25 +3,21 @@ const User = db.users;
 const Op = db.Sequelize.Op;
 
 exports.tryLoging = (req, res) => {
-    User.findAll({ //find user with received user and pass from api call from frontend
-      where: {
-        username: req.body.data.name,
-        password: req.body.data.pin
-      }
-    })
-    .then(data => {
-      if(data.length > 0) { //if found some user with that username and password, return true which means he logged succesfully
-        res.send(true);
-      } else {
-        res.send(false);
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Error tryLoging() in user.controller.js"
-      });
+  User.findAll({ //find user with received user and pass from api call from frontend
+    where: {
+      username: req.body.data.name,
+      password: req.body.data.pin
+    }
+  })
+  .then(data => {
+    res.send(data); //Send logged user info back
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error tryLoging() in user.controller.js"
     });
+  });
 };
 
 // Create and Save
@@ -70,7 +66,23 @@ exports.findAll = (req, res) => {
 
 // Find a single with an id
 exports.findOne = (req, res) => {
-  
+  const id = req.params.id;
+
+  User.findByPk(id)
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find User with id=${id}. (findOne() in user.controller.js)`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving User with id=" + id + ". (findOne() in user.controller.js)"
+      });
+    });
 };
 
 // Update by the id in the request
@@ -85,10 +97,5 @@ exports.delete = (req, res) => {
 
 // Delete all from the database.
 exports.deleteAll = (req, res) => {
-  
-};
-
-// Find all published
-exports.findAllPublished = (req, res) => {
   
 };

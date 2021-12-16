@@ -1,8 +1,12 @@
+const { route } = require("express/lib/application");
+
 module.exports = app => {
     const games = require("../controllers/game.controller.js");
   
     var router = require("express").Router();
   
+    router.post("/enter-game-room", games.enterGameRoom);
+
     // Create a new Tutorial
     router.post("/", games.create);
   
