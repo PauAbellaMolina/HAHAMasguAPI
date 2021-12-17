@@ -26,6 +26,7 @@ exports.create = (req, res) => {
     gameCode: req.body.gameCode,
     idCreator: req.body.idCreator,
     guess: req.body.guess,
+    hint: req.body.hint,
     emoji1: req.body.emoji1,
     emoji2: req.body.emoji2,
     emoji3: req.body.emoji3,

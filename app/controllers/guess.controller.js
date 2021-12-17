@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
   //Create
   const guess = {
-    idGame: req.body.state.idGame,
+    idGame: req.body.state.guessing.idGame,
     idUser: req.body.state.idUser,
     guessing: req.body.state.guessing.txtPlayerAnswer,
     photo1: req.body.state.guessing.photos.photo1,
@@ -45,7 +45,21 @@ exports.findAll = (req, res) => {
 
 // Find a single with an id
 exports.findOne = (req, res) => {
-  
+  Guess.findAll({ //find games with received gameCode from api call from frontend
+    where: {
+      idGame: req.params.idGame,
+      idUser: req.params.idUser,
+    }
+  })
+  .then(data => {
+    res.send(data); //Send guess back
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error findOne() in guess.controller.js"
+    });
+  });
 };
 
 // Update by the id in the request

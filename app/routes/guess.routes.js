@@ -10,7 +10,7 @@ module.exports = app => {
     router.get("/", guesses.findAll);
   
     // Retrieve a single Tutorial with id
-    router.get("/:id", guesses.findOne);
+    router.get("/:idGame/:idUser", guesses.findOne);
   
     // Update a Tutorial with id
     router.put("/:id", guesses.update);

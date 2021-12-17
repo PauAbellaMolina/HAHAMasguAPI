@@ -12,20 +12,23 @@ module.exports = (sequelize, Sequelize) => {
       idCreator: {
         type: Sequelize.INTEGER
       },
+      hint: {
+        type: Sequelize.STRING
+      },
       guess: {
         type: Sequelize.STRING
       },
       emoji1: {
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(1)
       },
       emoji2: {
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(1)
       },
       emoji3: {
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(1)
       },
       emoji4: {
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(1)
       },
       idWinner: {
         type: Sequelize.INTEGER
