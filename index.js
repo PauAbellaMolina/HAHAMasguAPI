@@ -52,21 +52,22 @@ http.listen(portIO, () => {
 io.on('connection', (socket) => {
   console.log('-----> A USER CONNECTED');
 
-  //Emitting from socket to clients
-  io.emit("customEmit");
-
-  //When receiving test from client
-  socket.on('test', () => {
-    io.emit("test"); //Emit test from socker
-  });
+  let room;
 
   //Listen to room joinings from clients
-  socket.on('room', (room) => {
-    console.log("-----> JOINED ROOM WITH ID " + room)
+  socket.on('room', (roomCode) => {
+    console.log("-----> JOINED ROOM WITH ID " + roomCode)
     //Join connection to room
-    socket.join(room);
+    socket.join(roomCode);
+    room = roomCode;
     //Emit back to connected client that the room has been joined correctly
     io.to(socket.id).emit("roomJoined");
+  });
+
+  //When receiving test from client
+  socket.on('newGuessingSubmitted', () => {
+    // io.emit("test"); //Emit test from socket
+    io.in(room).emit("test");
   });
 
   socket.on('disconnect', () => {

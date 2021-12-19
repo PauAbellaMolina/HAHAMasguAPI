@@ -8,6 +8,8 @@ module.exports = app => {
   
     // Retrieve all Tutorials
     router.get("/", guesses.findAll);
+
+    router.get("/notMine/:idGame/:idUser", guesses.findAllButMine);
   
     // Retrieve a single Tutorial with id
     router.get("/:idGame/:idUser", guesses.findOne);

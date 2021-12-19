@@ -6,13 +6,13 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
   //Create
   const guess = {
-    idGame: req.body.state.guessing.idGame,
-    idUser: req.body.state.idUser,
-    guessing: req.body.state.guessing.txtPlayerAnswer,
-    photo1: req.body.state.guessing.photos.photo1,
-    photo2: req.body.state.guessing.photos.photo2,
-    photo3: req.body.state.guessing.photos.photo3,
-    photo4: req.body.state.guessing.photos.photo4,
+    idGame: req.body.stateAux.gameData.id,
+    idUser: req.body.stateAux.guessing.idUser,
+    guessing: req.body.stateAux.guessing.txtPlayerAnswer,
+    photo1: req.body.stateAux.guessing.photos.photo1,
+    photo2: req.body.stateAux.guessing.photos.photo2,
+    photo3: req.body.stateAux.guessing.photos.photo3,
+    photo4: req.body.stateAux.guessing.photos.photo4,
   };
 
   // Save
@@ -41,6 +41,28 @@ exports.findAll = (req, res) => {
             err.message || "Error findAll() in guess.controller.js"
         });
       });
+};
+
+// Retrieve all but the one the requesting client submitted
+exports.findAllButMine = (req, res) => {
+  
+  Guess.findAll({
+    where: {
+      idGame: req.params.idGame,
+      idUser: {
+        [Op.notLike]: req.params.idUser,
+      }
+    }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Error findAllButMine() in guess.controller.js"
+      });
+    });
 };
 
 // Find a single with an id
