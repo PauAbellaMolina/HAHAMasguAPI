@@ -8,7 +8,7 @@ const io = require('socket.io')(http);
 const portIO = 3000;
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -64,10 +64,12 @@ io.on('connection', (socket) => {
     io.to(socket.id).emit("roomJoined");
   });
 
-  //When receiving test from client
+  //When receiving newGuessingSubmitted from client
   socket.on('newGuessingSubmitted', () => {
+    // io.emit("test");
     // io.emit("test"); //Emit test from socket
-    io.in(room).emit("test");
+    console.log("------HHEERREE---------------------------------------------------------")
+    io.in(room).emit("newGuess"); //Emit new guess "available" to clients so they can refetch guesses
   });
 
   socket.on('disconnect', () => {
