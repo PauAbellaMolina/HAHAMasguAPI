@@ -31,7 +31,11 @@ exports.create = (req, res) => {
 // Retrieve all
 exports.findAll = (req, res) => {
   
-    Guess.findAll()
+    Guess.findAll({
+      where: {
+        idGame: req.params.idGame
+      }
+    })
       .then(data => {
         res.send(data);
       })

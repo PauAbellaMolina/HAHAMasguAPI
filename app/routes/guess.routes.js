@@ -7,9 +7,7 @@ module.exports = app => {
     router.post("/", guesses.create);
   
     // Retrieve all Tutorials
-    router.get("/", guesses.findAll);
-
-    router.get("/notMine/:idGame/:idUser", guesses.findAllButMine);
+    router.get("/:idGame", guesses.findAll);
   
     // Retrieve a single Tutorial with id
     router.get("/:idGame/:idUser", guesses.findOne);
