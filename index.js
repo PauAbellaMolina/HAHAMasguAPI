@@ -66,10 +66,12 @@ io.on('connection', (socket) => {
 
   //When receiving newGuessingSubmitted from client
   socket.on('newGuessingSubmitted', () => {
-    // io.emit("test");
-    // io.emit("test"); //Emit test from socket
-    console.log("------HHEERREE---------------------------------------------------------")
     io.in(room).emit("newGuess"); //Emit new guess "available" to clients so they can refetch guesses
+  });
+
+  //When receiving winnerPicked from client
+  socket.on('winnerPicked', () => {
+    io.in(room).emit("winnerPicked"); //Emit that winner has been picked to clients so their router can push to the winner view
   });
 
   socket.on('disconnect', () => {

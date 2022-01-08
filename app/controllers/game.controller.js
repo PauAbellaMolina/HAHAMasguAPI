@@ -64,7 +64,36 @@ exports.findAll = (req, res) => {
 
 // Find a single with an id
 exports.findOne = (req, res) => {
-  
+  Game.findAll({ //find games with received id from api call from frontend
+    where: {
+      id: req.params.id,
+    }
+  })
+  .then(data => {
+    res.send(data); //Send room back
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error findOne() in game.controller.js"
+    });
+  });
+};
+
+exports.pickWinner = (req, res) => {
+  Game.update(
+    { idWinner: req.params.idUser },
+    { where: { id: req.params.idGame } }
+  )
+  .then(data => {
+    res.send(data); //Send room back
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error pickWinner() in game.controller.js"
+    });
+  });
 };
 
 // Update by the id in the request

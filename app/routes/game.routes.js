@@ -15,6 +15,8 @@ module.exports = app => {
   
     // Retrieve a single Tutorial with id
     router.get("/:id", games.findOne);
+
+    router.post("/pickWinner/:idGame/:idUser", games.pickWinner);
   
     // Update a Tutorial with id
     router.put("/:id", games.update);
