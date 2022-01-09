@@ -4,6 +4,7 @@
   "description": "Node.js Express REST API for the hahamasgu game",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pau",

@@ -21,30 +21,54 @@ exports.enterGameRoom = (req, res) => {
 
 // Create and Save
 exports.create = (req, res) => {
+
+  //Array that will hold already in use gameCodes
+  let gameCodesExclude = [];
+
+  //Get all games
+  Game.findAll()
+  .then(data => {
+    //Push the created game's gamecodes and save them in the array
+    data.forEach(game => {
+      gameCodesExclude.push(game.gameCode)
+    });
+  })
+  .catch(err => {
+    console.log(err)
+  });
+
+  //New gameCode we are about to generate
+  let gameCodeAux = 0
+
+  //Loop that generates a gameCode until it gets one not in the array of already existing ones
+  do {
+    gameCodeAux = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
+  } while (gameCodesExclude.includes(gameCodeAux));
+
   // Create
   const game = {
-    gameCode: req.body.gameCode,
-    idCreator: req.body.idCreator,
-    guess: req.body.guess,
-    hint: req.body.hint,
-    emoji1: req.body.emoji1,
-    emoji2: req.body.emoji2,
-    emoji3: req.body.emoji3,
-    emoji4: req.body.emoji4,
-    idWinner: req.body.idWinner,
+    gameCode: gameCodeAux,
+    idCreator: req.body.gameAux.idCreator,
+    guess: req.body.gameAux.guess,
+    hint: req.body.gameAux.hint,
+    emoji1: req.body.gameAux.emoji1,
+    emoji2: req.body.gameAux.emoji2,
+    emoji3: req.body.gameAux.emoji3,
+    emoji4: req.body.gameAux.emoji4,
+    idWinner: req.body.gameAux.idWinner,
   };
 
   // Save
   Game.create(game)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Error create() in game.controller.js"
-      });
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Error create() in game.controller.js"
     });
+  });
 };
 
 // Retrieve all
