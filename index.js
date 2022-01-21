@@ -8,9 +8,9 @@ const io = require('socket.io')(http);
 const portIO = 3000;
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "https://romantic-ritchie-5cbef4.netlify.app"
 };
-app.use(cors(corsOptions));
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(bodyParser.json({limit: '200mb'}));
 // parse requests of content-type - application/x-www-form-urlencoded
