@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports = app => {
     const guesses = require("../controllers/guess.controller.js");
   
@@ -21,5 +22,5 @@ module.exports = app => {
     // Delete all Tutorials
     router.delete("/", guesses.deleteAll);
   
-    app.use('/api/guesses', router);
+    app.use(process.env.API_TOKEN+'/api/guesses', router);
   };

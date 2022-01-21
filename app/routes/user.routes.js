@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports = app => {
     const users = require("../controllers/user.controller.js");
   
@@ -23,5 +24,5 @@ module.exports = app => {
     // Delete all Tutorials
     router.delete("/", users.deleteAll);
   
-    app.use('/api/users', router);
+    app.use(process.env.API_TOKEN+'/api/users', router);
   };

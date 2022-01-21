@@ -1,4 +1,5 @@
 const { route } = require("express/lib/application");
+require('dotenv').config();
 
 module.exports = app => {
     const games = require("../controllers/game.controller.js");
@@ -27,5 +28,5 @@ module.exports = app => {
     // Delete all Tutorials
     router.delete("/", games.deleteAll);
   
-    app.use('/api/games', router);
+    app.use(process.env.API_TOKEN+'/api/games', router);
   };
