@@ -4,7 +4,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, { 
+  cors: {
+    origin: "https://hahamasgu.netlify.app",
+    methods: ["GET", "POST"]  
+  }
+});
 const portIO = 3000;
 
 var corsOptions = {
