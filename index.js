@@ -6,7 +6,7 @@ const cors = require("cors");
 const http = require('http').Server(app);
 const io = require('socket.io')(http, { 
   cors: {
-    origin: "https://hahamasgu.netlify.app",
+    origin: "https://hahamasgu.pauabella.dev",
     methods: ["GET", "POST"]  
   }
 });
