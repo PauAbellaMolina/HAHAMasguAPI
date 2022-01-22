@@ -19,16 +19,16 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       emoji1: {
-        type: Sequelize.CHAR(1)
+        type: Sequelize.CHAR(10)
       },
       emoji2: {
-        type: Sequelize.CHAR(1)
+        type: Sequelize.CHAR(10)
       },
       emoji3: {
-        type: Sequelize.CHAR(1)
+        type: Sequelize.CHAR(10)
       },
       emoji4: {
-        type: Sequelize.CHAR(1)
+        type: Sequelize.CHAR(10)
       },
       idWinner: {
         type: Sequelize.INTEGER
